@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-navy: #150b3d;
+  --color-brand-red: #ff6b6b;
+  --color-sidebar-bg: #150b3d;
+}
