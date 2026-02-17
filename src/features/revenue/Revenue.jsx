@@ -89,7 +89,7 @@ const Revenue = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
           {/* Total Subscriptions */}
-          <div className="relative bg-white rounded-xl p-6 border border-gray-500">
+          <div className="relative bg-white rounded-xl p-6 border border-gray-300">
             <div className="absolute top-6 right-6 bg-indigo-100 text-indigo-600 p-3 rounded-full">
               <Users size={20} />
             </div>
@@ -98,7 +98,7 @@ const Revenue = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mt-2 text-slate-800">
               5,424,326
             </h2>
-            <div className="border-t border-gray-500 -mx-6 my-4"></div>
+            <div className="border-t border-gray-300 -mx-6 my-4"></div>
 
             <div className="flex items-center gap-2 mt-4 text-sm text-emerald-600">
               <ArrowUp size={16} />
@@ -107,7 +107,7 @@ const Revenue = () => {
           </div>
 
           {/* Subscription Revenue */}
-          <div className="relative bg-white rounded-xl p-6 border border-gray-500">
+          <div className="relative bg-white rounded-xl p-6 border border-gray-300">
             <div className="absolute top-6 right-6 bg-orange-100 text-orange-600 p-3 rounded-full">
               <DollarSign size={20} />
             </div>
@@ -116,7 +116,7 @@ const Revenue = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mt-2 text-slate-800 ">
               5,424,326
             </h2>
-            <div className="border-t border-gray-500 -mx-6 my-4"></div>
+            <div className="border-t border-gray-300 -mx-6 my-4"></div>
 
             <div className="flex items-center gap-2 mt-4 text-sm text-emerald-600">
               <ArrowUp size={16} />
@@ -125,7 +125,7 @@ const Revenue = () => {
           </div>
 
           {/* Referral Payout */}
-          <div className="relative bg-white rounded-xl p-6 border border-gray-500 md:col-span-2 lg:col-span-1">
+          <div className="relative bg-white rounded-xl p-6 border border-gray-300 md:col-span-2 lg:col-span-1">
             <div className="absolute top-6 right-6 bg-pink-100 text-[#FF77FF] p-3 rounded-full">
               <HandCoins size={20} />
             </div>
@@ -134,7 +134,7 @@ const Revenue = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mt-2 text-slate-800">
               5,424,326
             </h2>
-            <div className="border-t border-gray-500 -mx-6 my-4"></div>
+            <div className="border-t border-gray-300 -mx-6 my-4"></div>
 
             <div className="flex items-center gap-2 mt-4 text-sm text-red-500">
               <ArrowDown size={16} />
