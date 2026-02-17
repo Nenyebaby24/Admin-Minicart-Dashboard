@@ -67,6 +67,16 @@ Figma-Aligned Stat Cards: Four key metric cards featuring custom hex-coded paste
 
 Dynamic Badges: Custom Badge component that toggles between "increased" and "decreased" labels based on the isUp prop.
 
+# Dropdown Arrow Styling Note
+
+The dropdown arrow in the filter select does not exactly match the Figma design.
+
+This is because the default <select> element uses a native browser-controlled arrow, which cannot be repositioned or styled using padding alone.
+
+Adding Tailwind classes such as pr-8 only increases the internal spacing for the text content. The native dropdown arrow remains pinned to the right edge of the element because its positioning is handled by the browser’s built-in UI rendering.
+
+
+
 # 🎨 Color Palette
 Primary Navy: #150B3D (Sidebar active state)
 

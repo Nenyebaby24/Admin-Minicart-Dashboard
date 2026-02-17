@@ -36,8 +36,7 @@ const NavItem = ({ icon: Icon, label, active, hasSubmenu, size = "md" }) => {
   );
 };
 
-const Sidebar = () => {
-
+const Sidebar = ({ isOpen }) => {
   const menuItems = [
     { path: '/', icon: Home, label: 'Dashboard' },
     { path: '/revenue', icon: DollarSign, label: 'Revenue' },
@@ -58,22 +57,26 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-100 hidden lg:flex flex-col p-6 sticky top-0 h-screen overflow-y-auto">
+    <aside className={`
+      fixed inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-100 
+      flex flex-col p-6 h-screen overflow-y-auto transform transition-transform duration-300 ease-in-out
+      ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
+      lg:translate-x-0 lg:sticky lg:top-0 lg:inset-auto
+    `}>
 
       <div className="flex items-center gap-2 mb-10 px-2">
         <div className="bg-red-500 p-1.5 rounded-lg text-white">
           <ShoppingCart size={20} />
         </div>
         <span className="text-2xl font-bold italic text-[#150b3d] tracking-tight">
-           minicart
+            minicart
         </span>
       </div>
 
       <nav className="space-y-8">
-
         {/* MENU */}
         <div>
-          <p className="text-lg font-medium text-gray-500 uppercase tracking-widest mb-4 px-2">
+          <p className="text-base font-medium text-gray-500 uppercase mb-4 mr-4">
             Menu
           </p>
 
@@ -88,7 +91,7 @@ const Sidebar = () => {
                   <NavItem
                     {...item}
                     active={isActive}
-                    size="base"   // Larger text for Menu
+                    size="base"
                   />
                 )}
               </NavLink>
@@ -96,13 +99,13 @@ const Sidebar = () => {
           </div>
         </div>
 
-        {/* SYSTEM */}
+        {/* SYSTEM SECTION RESTORED */}
         <div>
-          <p className="text-base font-medium text-gray-500 uppercase tracking-widest mb-4 px-2">
+          <p className="text-base font-medium text-gray-500 uppercase mb-4 mr-4 px-2">
             System
           </p>
 
-          <div className="space-y-1">
+          <div className="space-y-1 ">
             {systemItems.map((item) => (
               <NavLink
                 key={item.path}
@@ -112,8 +115,7 @@ const Sidebar = () => {
                   <NavItem
                     {...item}
                     active={isActive}
-                    size="base"   // Smaller text for System
-                    gap="gap-1"
+                    size="base"
                   />
                 )}
               </NavLink>
@@ -122,14 +124,12 @@ const Sidebar = () => {
             <div className="mt-4">
               <NavItem icon={LogOut} label="Log Out" size="base" />
             </div>
-
           </div>
         </div>
-
       </nav>
     </aside>
   );
 };
 
-export default Sidebar;
+export default Sidebar; 
 
