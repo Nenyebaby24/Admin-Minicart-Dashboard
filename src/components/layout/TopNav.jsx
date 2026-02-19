@@ -1,19 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
-import { Search, Moon, Sun, Bell, ChevronDown, LogOut, User, Menu, X } from 'lucide-react';
-import Input from '../ui/Input';
-
-// Note: You should pass setSidebarOpen and isSidebarOpen from your Layout/App component 
-// if the Sidebar lives outside of TopNav. For this example, I'll include the state here.
+import { Search, Moon, Sun, Bell, ChevronDown, LogOut, User, Menu, X, ArrowLeft } from 'lucide-react';
 
 const TopNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
 
   const notificationRef = useRef(null);
   const profileRef = useRef(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (notificationRef.current && !notificationRef.current.contains(event.target)) {
@@ -23,7 +19,6 @@ const TopNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
         setShowProfileMenu(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
@@ -34,87 +29,112 @@ const TopNav = ({ isSidebarOpen, setIsSidebarOpen }) => {
   };
 
   return (
-    <header className="h-20 bg-white dark:bg-slate-900 border-b border-gray-400 dark:border-slate-800 flex items-center justify-between px-4 md:px-8 sticky top-0 z-50 transition-colors">
+    <header className="h-20 bg-white dark:bg-slate-900 border-b border-gray-400 dark:border-slate-800 flex items-center justify-between px-3 sm:px-6 lg:px-8 sticky top-0 z-40 transition-colors">
       
-      <div className="flex items-center gap-4">
-        {/* Mobile Toggle Bar - Hidden on Desktop (md:hidden) */}
-        
-        <button 
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="p-2 lg:hidden text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition"
+      {/* Left Section: Menu Toggle + Search */}
+      <div className={`flex items-center gap-2 sm:gap-4 ${isSearchExpanded ? 'w-full' : 'flex-1'}`}>
+        {!isSearchExpanded && (
+          <button 
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="p-2 lg:hidden text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition shrink-0"
           >
-          {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+            {isSidebarOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        )}
 
-        {/* Search - Hidden on very small screens to save space, or use full width logic */}
-        <div className="hidden sm:block w-96 -ml-7 border border-gray-400 rounded-lg px-4 py-3 bg-[#f8fafc] dark:bg-slate-800/50 focus-within:ring-2 focus-within:ring-red-200 ">
-           <Search
-           size={16}
-           className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
-           />
-           <input 
-            placeholder="Search type command"
-            border= "none"
-            className="bg-transparent border-none focus:ring-0 focus:outline-transparent w-full pl-5"/>
+        {/* Search Bar Container */}
+        <div className={`relative flex items-center transition-all duration-300 ${
+          isSearchExpanded 
+            ? 'w-full bg-white dark:bg-slate-900 z-50' 
+            : 'hidden sm:flex max-w-xs md:max-w-sm w-full border border-gray-400 rounded-lg px-3 py-2 bg-[#f8fafc] dark:bg-slate-800/50'
+        }`}>
+          {isSearchExpanded && (
+            <button 
+              onClick={() => setIsSearchExpanded(false)}
+              className="p-2 mr-1 text-gray-500 sm:hidden"
+            >
+              <ArrowLeft size={20} />
+            </button>
+          )}
+          
+          <Search size={16} className={`text-gray-500 shrink-0 ${isSearchExpanded ? 'hidden' : 'block'}`} />
+          
+          <input 
+            placeholder="Search..."
+            className={`bg-transparent border-none focus:ring-0 focus:outline-none w-full text-sm ${
+              isSearchExpanded ? 'p-2 border rounded-lg border-gray-300 dark:border-slate-700' : 'pl-2'
+            }`}
+            autoFocus={isSearchExpanded}
+          />
         </div>
+
+        {/* Search Trigger for Mobile */}
+        {!isSearchExpanded && (
+          <button 
+            onClick={() => setIsSearchExpanded(true)}
+            className="sm:hidden p-2 rounded-full border border-gray-400 text-gray-500 hover:bg-gray-50 transition"
+          >
+            <Search size={18} />
+          </button>
+        )}
       </div>
 
-      <div className="flex items-center gap-3 md:gap-6">
-        {/* Dark Mode */}
-        <button
-          onClick={toggleDarkMode}
-          className="p-3.5 rounded-full border border-gray-400 dark:border-slate-700 text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800 transition cursor-pointer"
-        >
-          {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
-
-        {/* Notifications */}
-        <div className="relative" ref={notificationRef}>
+      {/* Right Section: Icons (Hidden on mobile when search is expanded) */}
+      {!isSearchExpanded && (
+        <div className="flex items-center gap-1.5 sm:gap-3 md:gap-4 shrink-0 ml-2">
+          {/* Dark Mode */}
           <button
-            onClick={() => setShowNotifications(!showNotifications)}
-            className="p-3.5 rounded-full border border-gray-400 dark:border-slate-700 text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800 relative transition cursor-pointer"
+            onClick={toggleDarkMode}
+            className="p-2 sm:p-3 rounded-full border border-gray-400 dark:border-slate-700 text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800 transition"
           >
-            <Bell size={20} />
-            <span className="absolute top-3 right-3 w-2.5 h-2.5 bg-orange-400 rounded-full border-2 border-white"></span>
+            {darkMode ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          {showNotifications && (
-            <div className="absolute right-0 mt-3 w-72 bg-white dark:bg-slate-800 shadow-xl rounded-xl border border-gray-100 dark:border-slate-700 p-4 space-y-3">
-              <p className="font-semibold text-sm text-slate-700 dark:text-slate-200">Notifications</p>
-              <div className="text-sm text-gray-500 dark:text-gray-400">You have 3 new updates.</div>
-            </div>
-          )}
-        </div>
+          {/* Notifications */}
+          <div className="relative" ref={notificationRef}>
+            <button
+              onClick={() => setShowNotifications(!showNotifications)}
+              className="p-2 sm:p-3 rounded-full border border-gray-400 dark:border-slate-700 text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800 relative transition"
+            >
+              <Bell size={18} />
+              <span className="absolute top-2 right-2 w-2 h-2 bg-orange-400 rounded-full border border-white"></span>
+            </button>
 
-        {/* Profile */}
-        <div className="relative" ref={profileRef}>
-          <div
-            onClick={() => setShowProfileMenu(!showProfileMenu)}
-            className="flex items-center gap-2 cursor-pointer group"
-          >
-            <img
-              src="https://i.pravatar.cc/150?u=jane"
-              alt="Jane"
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border border-gray-400"
-            />
-            <span className="hidden md:block font-semibold text-sm text-slate-800 dark:text-white">
-              Jane Austin
-            </span>
-            <ChevronDown size={20} className="text-gray-400 group-hover:text-gray-600" />
+            {showNotifications && (
+              <div className="absolute right-0 mt-3 w-64 sm:w-72 bg-white dark:bg-slate-800 shadow-xl rounded-xl border border-gray-100 dark:border-slate-700 p-4 space-y-3 z-50">
+                <p className="font-semibold text-sm text-slate-700 dark:text-slate-200">Notifications</p>
+                <div className="text-sm text-gray-500 dark:text-gray-400">You have 3 new updates.</div>
+              </div>
+            )}
           </div>
 
-          {showProfileMenu && (
-            <div className="absolute right-0 mt-3 w-48 bg-white dark:bg-slate-800 shadow-xl rounded-xl border border-gray-100 dark:border-slate-700 py-2">
-              <button className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 w-full text-left">
-                <User size={20} /> Profile
-              </button>
-              <button className="flex items-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-gray-50 dark:hover:bg-slate-700 w-full text-left">
-                <LogOut size={20} /> Log Out
-              </button>
+          {/* Profile */}
+          <div className="relative" ref={profileRef}>
+            <div
+              onClick={() => setShowProfileMenu(!showProfileMenu)}
+              className="flex items-center gap-1.5 sm:gap-2 cursor-pointer group"
+            >
+              <img
+                src="https://i.pravatar.cc/150?u=jane"
+                alt="Jane"
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border border-gray-400"
+              />
+              <ChevronDown size={16} className="text-gray-400 group-hover:text-gray-600 hidden xs:block" />
             </div>
-          )}
+
+            {showProfileMenu && (
+              <div className="absolute right-0 mt-3 w-44 sm:w-48 bg-white dark:bg-slate-800 shadow-xl rounded-xl border border-gray-100 dark:border-slate-700 py-2 z-50">
+                <button className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 w-full text-left">
+                  <User size={18} /> Profile
+                </button>
+                <button className="flex items-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-gray-50 dark:hover:bg-slate-700 w-full text-left">
+                  <LogOut size={18} /> Log Out
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 };
