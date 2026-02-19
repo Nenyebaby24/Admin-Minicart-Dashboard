@@ -3,62 +3,14 @@ import { Search, MoreVertical, ArrowUp, ArrowDown, DollarSign, Users, HandCoins 
 const Revenue = () => {
     
   const transactions = [
-    {
-      type: "Subscription",
-      store: "Luisa Via Roma",
-      country: "Kuwait",
-      value: "$16,500.00",
-      status: "Completed",
-    },
-    {
-      type: "Referral",
-      store: "Revolve",
-      country: "Kazakhstan",
-      value: "$1,878.50",
-      status: "Pending",
-    },
-    {
-      type: "Subscription",
-      store: "Marks and Spencer",
-      country: "Korea, South",
-      value: "$102.00",
-      status: "Refunded",
-    },
-    {
-      type: "Subscription",
-      store: "MyTheresa",
-      country: "Indonesia",
-      value: "$15,000,000.00",
-      status: "Canceled",
-    },
-    {
-      type: "Referral",
-      store: "Coggles",
-      country: "Italy",
-      value: "$96.00",
-      status: "Completed",
-    },
-    {
-      type: "Referral",
-      store: "Amazon Fashion",
-      country: "Japan",
-      value: "$349.00",
-      status: "Completed",
-    },
-    {
-      type: "Subscription",
-      store: "Boohoo",
-      country: "Honduras",
-      value: "$680.00",
-      status: "Completed",
-    },
-    {
-      type: "Subscription",
-      store: "Rag and Bone",
-      country: "Haiti",
-      value: "$120,000.00",
-      status: "Completed",
-    },
+    { type: "Subscription", store: "Luisa Via Roma", country: "Kuwait", value: "$16,500.00", status: "Completed" },
+    { type: "Referral", store: "Revolve", country: "Kazakhstan", value: "$1,878.50", status: "Pending" },
+    { type: "Subscription", store: "Marks and Spencer", country: "Korea, South", value: "$102.00", status: "Refunded" },
+    { type: "Subscription", store: "MyTheresa", country: "Indonesia", value: "$15,000,000.00", status: "Canceled" },
+    { type: "Referral", store: "Coggles", country: "Italy", value: "$96.00", status: "Completed" },
+    { type: "Referral", store: "Amazon Fashion", country: "Japan", value: "$349.00", status: "Completed" },
+    { type: "Subscription", store: "Boohoo", country: "Honduras", value: "$680.00", status: "Completed" },
+    { type: "Subscription", store: "Rag and Bone", country: "Haiti", value: "$120,000.00", status: "Completed" },
   ];
 
   const statusStyles = {
@@ -70,7 +22,7 @@ const Revenue = () => {
 
   return (
     <>
-      <div className="mb-8 px-1">
+      <div className="mb-8 px-4 sm:px-1">
         <h1 className="text-2xl font-bold text-[#150b3d] mb-1">
           All Revenue
         </h1>
@@ -84,11 +36,10 @@ const Revenue = () => {
         </div>
       </div>
       
-      <div className="space-y-8">
+      <div className="space-y-8 px-4 sm:px-0">
         {/* ================= TOP CARDS ================= */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-          {/* Total Subscriptions */}
           <div className="relative bg-white rounded-xl p-6 border border-gray-300">
             <div className="absolute top-6 right-6 bg-indigo-100 text-indigo-600 p-3 rounded-full">
               <Users size={20} />
@@ -106,7 +57,6 @@ const Revenue = () => {
             </div>
           </div>
 
-          {/* Subscription Revenue */}
           <div className="relative bg-white rounded-xl p-6 border border-gray-300">
             <div className="absolute top-6 right-6 bg-orange-100 text-orange-600 p-3 rounded-full">
               <DollarSign size={20} />
@@ -124,7 +74,6 @@ const Revenue = () => {
             </div>
           </div>
 
-          {/* Referral Payout */}
           <div className="relative bg-white rounded-xl p-6 border border-gray-300 md:col-span-2 lg:col-span-1">
             <div className="absolute top-6 right-6 bg-pink-100 text-[#FF77FF] p-3 rounded-full">
               <HandCoins size={20} />
@@ -144,9 +93,9 @@ const Revenue = () => {
         </div>
 
         {/* ================= TRANSACTIONS ================= */}
-        <div className="bg-white rounded-2xl border border-gray-300 overflow-hidden p-4">
-          {/* Header */}
-          <div className="p-4 sm:p-6 border-b border-gray-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div className="bg-white rounded-2xl border border-gray-300 overflow-hidden p-4 sm:p-4">
+          
+          <div className="py-4 border-b border-gray-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <h3 className="text-lg font-semibold text-slate-800">
               Resent Transactions
             </h3>
@@ -162,9 +111,8 @@ const Revenue = () => {
             </div>
           </div>
 
-          {/* Filters */}
-          <div className="py-4 pl-0 pr-0 sm:py-6 sm:pl-0 sm:pr-0 border-b border-gray-100 flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
-            <div className="relative w-full lg:flex-1 max-w-md ml-0">
+          <div className="py-4 border-b border-gray-100 flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
+            <div className="relative w-full lg:flex-1 max-w-md">
               <Search
                 size={16}
                 className="absolute left-3 top-3.5 text-gray-400"
@@ -176,92 +124,84 @@ const Revenue = () => {
               />
             </div>
 
-            <div className="flex flex-wrap gap-3 sm:gap-4">
-              <select className="flex-1 sm:flex-none border border-gray-400 rounded-lg px-4 py-2.5 focus:outline-none bg-transparent">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full lg:w-auto">
+              <select className="w-full sm:w-auto border border-gray-400 rounded-lg px-4 py-2.5 focus:outline-none bg-transparent">
                 <option>All Status</option>
               </select>
-              <select className="flex-1 sm:flex-none border border-gray-400 rounded-lg px-4 py-2.5 focus:outline-none bg-transparent">
+              <select className="w-full sm:w-auto border border-gray-400 rounded-lg px-4 py-2.5 focus:outline-none bg-transparent">
                 <option>All Types</option>
               </select>
             </div>
           </div>
 
-          {/* Table Container with Horizontal Scroll */}
-          {/* Table Container */}
-        <div className="overflow-x-auto border border-gray-300 rounded-lg bg-white">
+          <div className="overflow-x-auto border border-gray-300 rounded-lg bg-white">
+            <table className="w-full text-sm min-w-[800px] border-collapse">
+              <thead className="bg-gray-100 text-gray-700">
+                <tr>
+                  <th className="border border-gray-300 p-4 w-12 text-center">
+                    <input type="checkbox" className="rounded" />
+                  </th>
+                  <th className="border border-gray-300 p-4 text-left">Type</th>
+                  <th className="border border-gray-300 p-4 text-left">Store</th>
+                  <th className="border border-gray-300 p-4 text-left">Country</th>
+                  <th className="border border-gray-300 p-4 text-left">Value</th>
+                  <th className="border border-gray-300 p-4 text-left">Status</th>
+                  <th className="border border-gray-300 p-4 text-left">Action</th>
+                </tr>
+              </thead>
 
-        <table className="w-full text-sm min-w-[800px] border-collapse">
+              <tbody>
+                {transactions.map((item, index) => (
+                  <tr key={index} className="hover:bg-gray-50 transition-colors">
+                    <td className="border border-gray-300 p-4 text-center">
+                      <input type="checkbox" className="rounded" />
+                    </td>
+                    <td className="border border-gray-300 p-4">{item.type}</td>
+                    <td className="border border-gray-300 p-4">{item.store}</td>
+                    <td className="border border-gray-300 p-4 whitespace-nowrap">
+                      {item.country}
+                    </td>
+                    <td className="border border-gray-300 p-4 font-medium">
+                      {item.value}
+                    </td>
+                    <td className="border border-gray-300 p-4">
+                      <span
+                        className={`inline-block px-3 py-1 text-xs font-medium rounded-full ${statusStyles[item.status]}`}
+                      >
+                        {item.status}
+                      </span>
+                    </td>
+                    <td className="border border-gray-300 p-4 text-center">
+                      <MoreVertical
+                        size={18}
+                        className="text-gray-500 cursor-pointer hover:text-gray-700"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
 
-           {/* Header */}
-         <thead className="bg-gray-100 text-gray-700">
-          <tr>
-        <th className="border border-gray-300 p-4 w-12 text-center">
-          <input type="checkbox" className="rounded" />
-        </th>
-        <th className="border border-gray-300 p-4 text-left">Type</th>
-        <th className="border border-gray-300 p-4 text-left">Store</th>
-        <th className="border border-gray-300 p-4 text-left">Country</th>
-        <th className="border border-gray-300 p-4 text-left">Value</th>
-        <th className="border border-gray-300 p-4 text-left">Status</th>
-        <th className="border border-gray-300 p-4 text-left">Action</th>
-      </tr>
-    </thead>
+            <div className="p-4 sm:p-6 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500 text-center">
+              <p>Showing 1 to 8 of 32 entries</p>
 
-    {/* Body */}
-    <tbody>
-      {transactions.map((item, index) => (
-        <tr key={index} className="hover:bg-gray-50 transition-colors">
-          <td className="border border-gray-300 p-4 text-center">
-            <input type="checkbox" className="rounded" />
-          </td>
-          <td className="border border-gray-300 p-4">{item.type}</td>
-          <td className="border border-gray-300 p-4">{item.store}</td>
-          <td className="border border-gray-300 p-4 whitespace-nowrap">
-            {item.country}
-          </td>
-          <td className="border border-gray-300 p-4 font-medium">
-            {item.value}
-          </td>
-          <td className="border border-gray-300 p-4">
-            <span
-              className={`inline-block px-3 py-1 text-xs font-medium rounded-full ${statusStyles[item.status]}`}
-            >
-              {item.status}
-            </span>
-          </td>
-          <td className="border border-gray-300 p-4 text-center">
-            <MoreVertical
-              size={18}
-              className="text-gray-500 cursor-pointer hover:text-gray-700"
-            />
-          </td>
-        </tr>
-      ))}
-    </tbody>
-
-  </table>
-
-   {/* Pagination */}
-          <div className="p-4 sm:p-6 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500 text-center">
-            <p>Showing 1 to 8 of 32 entries</p>
-
-            <div className="flex flex-wrap justify-center items-center gap-2">
-              <button className="px-3 sm:px-4 py-2 border border-gray-400 rounded-lg hover:bg-gray-50 transition-colors">
-                Previous
-              </button>
-              <button className="px-3 sm:px-4 py-2 bg-red-500 text-white rounded-lg">
-                1
-              </button>
-              <button className="px-3 sm:px-4 py-2 border border-gray-400 rounded-lg hover:bg-gray-50 transition-colors">
-                2
-              </button>
-              <button className="px-3 sm:px-4 py-2 border border-gray-400 rounded-lg hover:bg-gray-50 transition-colors">
-                Next
-              </button>
-             </div>
-           </div>
+              <div className="flex flex-wrap justify-center items-center gap-2">
+                <button className="px-3 sm:px-4 py-2 border border-gray-400 rounded-lg hover:bg-gray-50 transition-colors">
+                  Previous
+                </button>
+                <button className="px-3 sm:px-4 py-2 bg-red-500 text-white rounded-lg">
+                  1
+                </button>
+                <button className="px-3 sm:px-4 py-2 border border-gray-400 rounded-lg hover:bg-gray-50 transition-colors">
+                  2
+                </button>
+                <button className="px-3 sm:px-4 py-2 border border-gray-400 rounded-lg hover:bg-gray-50 transition-colors">
+                  Next
+                </button>
+              </div>
+            </div>
           </div>
-          
+
         </div>
       </div>
     </>
@@ -269,3 +209,4 @@ const Revenue = () => {
 };
 
 export default Revenue;
+
