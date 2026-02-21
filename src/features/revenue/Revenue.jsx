@@ -134,9 +134,9 @@ const Revenue = () => {
             </div>
           </div>
 
-          <div className="overflow-x-auto border border-gray-300 rounded-lg bg-white">
-            <table className="w-full text-sm min-w-[800px] border-collapse">
-              <thead className="bg-gray-100 text-gray-700">
+          <div className="border border-gray-300 rounded-lg bg-white">
+            <table className="w-full text-sm border-collapse">
+              <thead className="hidden md:table-header-group bg-gray-100 text-gray-700">
                 <tr>
                   <th className="border border-gray-300 p-4 w-12 text-center">
                     <input type="checkbox" className="rounded" />
@@ -151,33 +151,52 @@ const Revenue = () => {
               </thead>
 
               <tbody>
-                {transactions.map((item, index) => (
-                  <tr key={index} className="hover:bg-gray-50 transition-colors">
-                    <td className="border border-gray-300 p-4 text-center">
-                      <input type="checkbox" className="rounded" />
-                    </td>
-                    <td className="border border-gray-300 p-4">{item.type}</td>
-                    <td className="border border-gray-300 p-4">{item.store}</td>
-                    <td className="border border-gray-300 p-4 whitespace-nowrap">
-                      {item.country}
-                    </td>
-                    <td className="border border-gray-300 p-4 font-medium">
-                      {item.value}
-                    </td>
-                    <td className="border border-gray-300 p-4">
-                      <span
-                        className={`inline-block px-3 py-1 text-xs font-medium rounded-full ${statusStyles[item.status]}`}
-                      >
-                        {item.status}
-                      </span>
-                    </td>
-                    <td className="border border-gray-300 p-4 text-center">
-                      <MoreVertical
-                        size={18}
-                        className="text-gray-500 cursor-pointer hover:text-gray-700"
-                      />
-                    </td>
-                  </tr>
+           {transactions.map((item, index) => (
+             <tr
+            key={index}
+           className="border-b border-gray-300 md:table-row block mb-4 md:mb-0"
+             >
+          <td className="border border-gray-300 p-4 text-center md:table-cell block md:text-center">
+           <input type="checkbox" className="rounded" />
+           </td>
+
+           <td className="border border-gray-300 p-4 md:table-cell block md:text-left">
+            <span className="md:hidden font-semibold">Type: </span>
+           {item.type}
+           </td>
+
+         <td className="border border-gray-300 p-4 md:table-cell block">
+          <span className="md:hidden font-semibold">Store: </span>
+           {item.store}
+          </td>
+
+      <td className="border border-gray-300 p-4 whitespace-nowrap md:table-cell block">
+        <span className="md:hidden font-semibold">Country: </span>
+        {item.country}
+      </td>
+
+          <td className="border border-gray-300 p-4 font-medium md:table-cell block">
+           <span className="md:hidden font-semibold">Value: </span>
+           {item.value}
+          </td>
+
+          <td className="border border-gray-300 p-4 md:table-cell block">
+           <span className="md:hidden font-semibold">Status: </span>
+           <span
+             className={`inline-block px-3 py-1 text-xs font-medium rounded-full ${statusStyles[item.status]}`}
+             >
+             {item.status}
+             </span>
+            </td>
+
+             <td className="border border-gray-300 p-4 text-center md:table-cell block">
+                <span className="md:hidden font-semibold">Action: </span>
+                <MoreVertical
+                size={18}
+                className="text-gray-500 cursor-pointer hover:text-gray-700 inline-block"
+                 />
+               </td>
+               </tr>
                 ))}
               </tbody>
             </table>

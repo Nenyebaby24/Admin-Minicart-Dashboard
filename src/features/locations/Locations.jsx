@@ -82,9 +82,9 @@ const Locations = () => {
         </div>
 
         {/* ================= TABLE ================= */}
-        <div className="w-full overflow-x-auto">
+        <div className="w-full">
           <table className="w-full text-sm text-left whitespace-nowrap">
-            <thead className="bg-slate-50 text-gray-600 border-b">
+            <thead className="hidden md:table-header-group bg-slate-50 text-gray-600 border-b">
               <tr>
                 <th className="p-4 font-semibold">Country Code</th>
                 <th className="p-4 font-semibold">Country</th>
@@ -95,40 +95,60 @@ const Locations = () => {
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-gray-200">
+                     <tbody>
               {countries.map((country, index) => (
-                <tr key={index} className="hover:bg-slate-50 transition">
-                  <td className="p-4 font-medium text-slate-700">{country.code}</td>
-                  <td className="p-4 text-slate-700">{country.name}</td>
-                  <td className="p-4 text-slate-700">{country.phone}</td>
-                  <td className="p-4 text-slate-700">{country.date}</td>
+               <tr
+                key={index}
+               className="border-b border-gray-200 md:table-row block mb-4 md:mb-0"
+               >
+              <td className="p-4 font-medium text-slate-700 md:table-cell block">
+             <span className="md:hidden font-semibold">Country Code: </span>
+               {country.code}
+             </td>
 
-                  {/* Status Toggle */}
-                  <td className="p-4">
-                    <button
-                      onClick={() => toggleStatus(index)}
-                      className={`w-11 h-6 flex items-center rounded-full p-1 transition ${
-                        country.active ? "bg-emerald-500" : "bg-gray-300"
-                      }`}
-                    >
-                      <div
-                        className={`bg-white w-4 h-4 rounded-full shadow-md transform transition ${
-                          country.active ? "translate-x-5" : ""
-                        }`}
-                      />
-                    </button>
-                  </td>
+             <td className="p-4 text-slate-700 md:table-cell block">
+             <span className="md:hidden font-semibold">Country: </span>
+             {country.name}
+           </td>
 
-                  {/* Action */}
-                  <td className="p-4">
-                    <MoreVertical
-                      size={18}
-                      className="text-gray-400 cursor-pointer hover:text-gray-600 transition"
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+          <td className="p-4 text-slate-700 md:table-cell block">
+           <span className="md:hidden font-semibold">Phone Code: </span>
+           {country.phone}
+          </td>
+
+          <td className="p-4 text-slate-700 md:table-cell block">
+           <span className="md:hidden font-semibold">Sync Date: </span>
+            {country.date}
+           </td>
+
+           {/* Status Toggle */}
+           <td className="p-4 md:table-cell block">
+            <span className="md:hidden font-semibold">Status: </span>
+            <button
+              onClick={() => toggleStatus(index)}
+             className={`w-11 h-6 flex items-center rounded-full p-1 transition mt-2 md:mt-0 ${
+            country.active ? "bg-emerald-500" : "bg-gray-300"
+             }`}
+             >
+            <div
+            className={`bg-white w-4 h-4 rounded-full shadow-md transform transition ${
+              country.active ? "translate-x-5" : ""
+            }`}
+           />
+           </button>
+          </td>
+
+             {/* Action */}
+            <td className="p-4 md:table-cell block">
+           <span className="md:hidden font-semibold">Action: </span>
+           <MoreVertical
+          size={18}
+          className="text-gray-400 cursor-pointer hover:text-gray-600 transition mt-2 md:mt-0"
+          />
+         </td>
+         </tr>
+          ))}
+        </tbody> 
           </table>
         </div>
 
